@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coval GTM</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background-color: #ffffff;
+    font-family: 'Inter', sans-serif;
+  }
+  #wave-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  #logo-link {
+    position: absolute;
+    top: 39px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  #logo-link:hover {
+    opacity: 0.7;
+  }
+  #logo {
+    height: 62px;
+  }
+
+  /* Pages */
+  .page {
+    display: none;
+    position: relative;
+    z-index: 2;
+    padding-top: 140px;
+    padding-bottom: 60px;
+  }
+  .page.active {
+    display: block;
+  }
+
+  /* Home */
+  #page-home {
+    min-height: 100vh;
+  }
+
+  /* Artifacts */
+  #slides {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+  .slide-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .slide-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .slide-nav-btn {
+    width: 40px;
+    height: 72px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    color: #1a1a1a;
+    transition: background 0.2s, color 0.2s;
+  }
+  .slide-nav-btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  .slide-nav-btn svg {
+    transition: transform 0.25s ease;
+  }
+  .slide-nav-btn:hover svg {
+    transform: scaleY(1.2);
+  }
+  .slide {
+    width: 60vw;
+    aspect-ratio: 16 / 9;
+    background: #fff;
+    border: 1px solid #ddd;
+    flex-shrink: 0;
+    position: relative;
+    container-type: inline-size;
+    overflow: hidden;
+    padding: 3cqw;
+    font-size: 2cqw;
+  }
+  .slide-flex {
+    display: flex;
+    flex-direction: column;
+  }
+  .slide-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16cqw;
+  }
+  .slide-logo-wrap {
+    flex-shrink: 0;
+    align-self: stretch;
+  }
+  .slide-logo {
+    height: 100%;
+    width: auto;
+    display: block;
+    transform: scale(0.85);
+  }
+  .slide-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 4.5cqw;
+    line-height: 1.1;
+    color: #1a1a1a;
+    text-align: left;
+    max-width: 60%;
+    word-wrap: break-word;
+  }
+  .slide-title-full {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+  .underline-pink {
+    text-decoration: underline;
+    text-decoration-color: #999;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.15em;
+  }
+  .highlight {
+    background-color: #e8e8e8;
+  }
+  .underline-orange {
+    text-decoration: underline;
+    text-decoration-color: #888;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.15em;
+  }
+  .underline-green {
+    text-decoration: underline;
+    text-decoration-color: #777;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.15em;
+  }
+  .highlight-pink {
+    background-color: #d0d0d0;
+  }
+  .highlight-orange {
+    background-color: #c8c8c8;
+  }
+  .highlight-blue {
+    background-color: #bbb;
+  }
+  .highlight-green {
+    background-color: #ddd;
+  }
+  .highlight, .highlight-pink, .highlight-orange, .highlight-blue, .highlight-green {
+    transition: transform 0.3s ease;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .highlight:hover, .highlight-pink:hover, .highlight-orange:hover, .highlight-blue:hover, .highlight-green:hover {
+    transform: scale(1.05);
+  }
+  .slide-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 4cqw;
+    line-height: 1.3;
+    color: #1a1a1a;
+    text-align: left;
+    max-width: 100%;
+    margin-top: 8cqw;
+  }
+  .slide-divider {
+    border: none;
+    height: max(0.15cqw, 1px);
+    background: #1a1a1a;
+    margin: 5cqw 0;
+  }
+  .slide-box {
+    margin-top: 0;
+    height: 20cqw;
+    padding: 2cqw 2cqw 2cqw 0;
+    display: flex;
+    align-items: stretch;
+    gap: 2cqw;
+  }
+  .slide-box-icon {
+    flex-shrink: 0;
+    height: 100%;
+    width: auto;
+    transition: filter 0.3s ease;
+    cursor: pointer;
+  }
+  .slide-box-icon:hover {
+    filter: invert(1);
+  }
+  .slide-box-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .slide-box-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 4cqw;
+    color: #1a1a1a;
+    flex: 1;
+  }
+  .slide-box-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 2.5cqw;
+    line-height: 1.3;
+    color: #1a1a1a;
+  }
+  .slide-meta {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.5cqw;
+    color: #1a1a1a;
+    text-align: left;
+    margin-top: 12cqw;
+  }
+  .slide-cases {
+    display: flex;
+    gap: 2cqw;
+    margin-top: 2cqw;
+    flex: 1;
+  }
+  .slide-case {
+    flex: 1;
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid;
+    padding: 2cqw;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .slide-case:not(.slide-case-toponly) {
+    cursor: pointer;
+  }
+  .slide-case:not(.slide-case-toponly):hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 1;
+  }
+  .slide-case:nth-child(1) { border-top-color: #999; }
+  .slide-case:nth-child(2) { border-top-color: #777; }
+  .slide-case:nth-child(3) { border-top-color: #555; }
+  .slide-case:nth-child(4) { border-top-color: #333; }
+  .slide-case:nth-child(5) { border-top-color: #1a1a1a; }
+  .slide-vdivider {
+    width: max(0.15cqw, 1px);
+    background: #1a1a1a;
+    align-self: stretch;
+  }
+  .slide-case-toponly {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+  .slide-case-logo {
+    width: 5cqw;
+    height: 5cqw;
+    object-fit: contain;
+    margin-bottom: 1.5cqw;
+  }
+  .slide-case-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.5cqw;
+    color: #1a1a1a;
+  }
+  .slide-cases-footer {
+    padding: 2cqw 2cqw 2cqw 2cqw;
+    margin-top: 0;
+    border: none;
+    border-left: 3px solid #999;
+  }
+  .slide-cases-footer .slide-box-title {
+    font-size: 2.5cqw;
+    flex: none;
+  }
+  .slide-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2cqw;
+    margin-top: 2.5cqw;
+    flex: 1;
+  }
+  .slide-grid-cell {
+    padding: 1.5cqw 2cqw;
+    border-left: 3px solid;
+  }
+  .slide-grid-cell:nth-of-type(1) { border-left-color: #999; }
+  .slide-grid-cell:nth-of-type(2) { border-left-color: #777; }
+  .slide-grid-cell:nth-of-type(3) { border-left-color: #555; }
+  .slide-grid-cell:nth-of-type(4) { border-left-color: #333; }
+  .slide-grid-divider {
+    margin: 1.5cqw 0 0 0;
+  }
+  .slide-grid-svg {
+    width: 100%;
+    height: 4cqw;
+    margin-top: 1cqw;
+  }
+  .slide-stacked-rows {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0;
+    flex: none;
+  }
+  .slide-two-col {
+    display: flex;
+    gap: 3cqw;
+  }
+  .slide-two-col-left {
+    flex: 0 0 auto;
+  }
+  .slide-two-col-right {
+    flex: 1;
+  }
+  .slide-topic-box {
+    padding: 0.8cqw 2cqw 0.8cqw 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8cqw;
+  }
+  .slide-topic-box .slide-row-icon {
+    width: 1.8cqw;
+    height: 1.8cqw;
+    padding: 0.4cqw;
+  }
+  .slide-topic-box .slide-box-desc {
+    font-size: 1.35cqw;
+  }
+  .slide-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-left: 3px solid;
+    padding: 0 0 0 2cqw;
+    min-height: 5cqw;
+    margin-bottom: 2cqw;
+  }
+  .slide-stacked-rows .slide-row:nth-of-type(1) { border-left-color: #999; }
+  .slide-stacked-rows .slide-row:nth-of-type(2) { border-left-color: #777; }
+  .slide-stacked-rows .slide-row:nth-of-type(3) { border-left-color: #555; }
+  .slide-stacked-rows .slide-row:nth-of-type(4) { border-left-color: #333; margin-bottom: 0; }
+  .slide-divider-row {
+    margin: 2cqw 0 2cqw 1.5cqw;
+  }
+  .slide-row-icon {
+    width: 3.5cqw;
+    height: 3.5cqw;
+    flex-shrink: 0;
+    margin-right: 2cqw;
+    background: #1a1a1a;
+    padding: 0.8cqw;
+    box-sizing: content-box;
+  }
+  .slide-row-icon path,
+  .slide-row-icon rect,
+  .slide-row-icon circle {
+    stroke: #fff;
+  }
+  .slide-row-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 2.5cqw;
+    color: #1a1a1a;
+    white-space: nowrap;
+    width: 30%;
+    flex-shrink: 0;
+  }
+  .slide-row-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.35cqw;
+    line-height: 1.3;
+    color: #1a1a1a;
+  }
+  .slide-cases-footer .slide-box-desc {
+    font-size: 1.8cqw;
+    margin-top: 1.5cqw;
+  }
+  .slide-case-desc {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.5cqw;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-top: 1cqw;
+  }
+  .timeline-day {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.4cqw;
+  }
+  .timeline-desc {
+    font-size: 1.55cqw;
+  }
+  .slide-timeline {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 2cqw;
+    margin-top: 7cqw;
+    margin-bottom: 7cqw;
+    height: 0;
+  }
+  .slide-timeline-line-svg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    width: 100%;
+  }
+  .slide-timeline-line-div {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2px;
+    left: calc(2cqw + 1.25cqw);
+    right: calc(2cqw + 1.25cqw);
+    background: linear-gradient(to right, #999, #333);
+  }
+  .slide-timeline-nodes {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+  }
+  .slide-timeline-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: none;
+    height: 100%;
+    position: relative;
+  }
+  .slide-timeline-num {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2.5cqw;
+    height: 2.5cqw;
+    z-index: 2;
+    overflow: visible;
+  }
+  .slide-timeline-node:nth-child(1) .slide-timeline-num circle { fill: #999; }
+  .slide-timeline-node:nth-child(2) .slide-timeline-num circle { fill: #8a8a8a; }
+  .slide-timeline-node:nth-child(3) .slide-timeline-num circle { fill: #7a7a7a; }
+  .slide-timeline-node:nth-child(4) .slide-timeline-num circle { fill: #6b6b6b; }
+  .slide-timeline-node:nth-child(5) .slide-timeline-num circle { fill: #5c5c5c; }
+  .slide-timeline-node:nth-child(6) .slide-timeline-num circle { fill: #4d4d4d; }
+  .slide-timeline-node:nth-child(7) .slide-timeline-num circle { fill: #3e3e3e; }
+  .slide-timeline-node.active .slide-timeline-num circle {
+    stroke: #0A1F3B;
+    stroke-width: 10;
+  }
+  .slide-timeline-label {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.3cqw;
+    color: #1a1a1a;
+    text-align: center;
+    line-height: 1.2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10cqw;
+  }
+  .slide-timeline-node:nth-child(odd) .slide-timeline-label {
+    top: calc(50% + 1.25cqw + 0.5cqw);
+  }
+  .slide-timeline-node:nth-child(even) .slide-timeline-label {
+    bottom: calc(50% + 1.25cqw + 0.5cqw);
+  }
+  .slide-timeline-node:first-child .slide-timeline-num {
+    left: 0;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+  }
+  .slide-timeline-node:first-child .slide-timeline-label {
+    left: 0;
+    transform: none;
+    text-align: left;
+  }
+  .slide-timeline-node:last-child .slide-timeline-num {
+    right: 0;
+    left: auto;
+    transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+  }
+  .slide-timeline-node:last-child .slide-timeline-label {
+    left: auto;
+    right: 0;
+    transform: none;
+    text-align: right;
+  }
+  .slide-timeline-detail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2cqw;
+    flex: none;
+  }
+  .slide-timeline-detail-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5cqw;
+  }
+  .slide-timeline-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2cqw;
+  }
+  .slide-timeline-detail-num {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.3cqw;
+    color: #fff;
+    width: 2.2cqw;
+    height: 2.2cqw;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .slide-timeline-detail-text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.6cqw;
+    color: #1a1a1a;
+  }
+  .slide-toggle-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 2cqw;
+  }
+  .slide-toggle {
+    position: relative;
+    display: inline-flex;
+    background: #e8e8e8;
+    border-radius: 2cqw;
+    padding: 0.3cqw;
+    width: 22cqw;
+    cursor: pointer;
+  }
+  .slide-toggle-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.6cqw;
+    line-height: 1;
+    color: #666;
+    padding: 1cqw 0;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .slide-toggle-option.active {
+    color: #fff;
+  }
+  .slide-toggle-slider {
+    position: absolute;
+    top: 0.3cqw;
+    left: 0.3cqw;
+    width: calc(50% - 0.6cqw);
+    height: calc(100% - 0.6cqw);
+    background: #1a1a1a;
+    border-radius: 1.7cqw;
+    transition: transform 0.3s ease;
+  }
+  .slide-toggle.future .slide-toggle-slider {
+    transform: translateX(calc(100% + 0.6cqw));
+  }
+  .slide-toggle-3 {
+    width: 42cqw;
+  }
+  .slide-toggle-3 .slide-toggle-slider {
+    width: calc(33.333% - 0.4cqw);
+  }
+  .slide-toggle-3.pos-1 .slide-toggle-slider {
+    transform: translateX(calc(100% + 0.3cqw));
+  }
+  .slide-toggle-3.pos-2 .slide-toggle-slider {
+    transform: translateX(calc(200% + 0.6cqw));
+  }
+  .slide-dropdown {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8cqw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.4cqw;
+    padding: 0.4cqw 1.2cqw;
+    border: 1px solid #ccc;
+    border-radius: 0.5cqw;
+    background: #fff;
+    color: #1a1a1a;
+    cursor: pointer;
+    user-select: none;
+  }
+  .slide-dropdown:hover {
+    border-color: #999;
+  }
+  .slide-dropdown-arrow {
+    width: 0;
+    height: 0;
+    border-left: 0.7cqw solid transparent;
+    border-right: 0.7cqw solid transparent;
+    border-top: 0.8cqw solid #1a1a1a;
+  }
+  .slide-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.3cqw);
+    left: 0;
+    min-width: 18cqw;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0.5cqw;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .slide-dropdown.open .slide-dropdown-menu {
+    display: block;
+  }
+  .slide-dropdown-item {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.4cqw;
+    padding: 0.4cqw 1.2cqw;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    position: relative;
+  }
+  .slide-dropdown-item:hover {
+    background: #f0f0f0;
+  }
+  .slide-dropdown-item.active {
+    background: #e8e8e8;
+  }
+  .slide-dropdown-drawer {
+    padding-left: 1.5cqw;
+    background: #f8f8f8;
+  }
+  .slide-dropdown-sub {
+    font-size: 1.2cqw;
+  }
+  .slide-dropdown-parent {
+    font-weight: 600;
+  }
+  .slide-toggle-panel {
+    display: none;
+  }
+  .slide-toggle-panel.active {
+    display: block;
+  }
+  .slide-tooltip {
+    text-decoration: underline;
+    text-decoration-color: #0A1F3B;
+    color: #0A1F3B;
+    cursor: pointer;
+    position: relative;
+  }
+  .slide-tooltip:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 1cqw;
+    font-weight: 400;
+    padding: 0.4cqw 0.7cqw;
+    border-radius: 0.3cqw;
+    white-space: normal;
+    width: max-content;
+    max-width: 20cqw;
+    z-index: 20;
+    margin-bottom: 0.4cqw;
+  }
+  .slide-checklist {
+    margin-top: 1cqw;
+  }
+  .slide-checklist-panel {
+    display: none;
+  }
+  .slide-checklist-panel.active {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, auto);
+    gap: 0 3cqw;
+  }
+  .slide-checklist-panel[data-step="2"].active {
+    grid-auto-flow: row;
+    grid-template-rows: none;
+  }
+  .slide-checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8cqw;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.3cqw;
+    color: #1a1a1a;
+    padding: 0.45cqw 0;
+    cursor: pointer;
+  }
+  .slide-checklist-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  .slide-checklist-item input[type="checkbox"] {
+    width: 8px;
+    min-width: 8px;
+    height: 8px;
+    min-height: 8px;
+    cursor: pointer;
+    accent-color: #1a1a1a;
+    flex-shrink: 0;
+  }
+  .slide-number {
+    position: absolute;
+    bottom: 1.5cqw;
+    right: 2cqw;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 1.8cqw;
+    color: #1a1a1a;
+  }
+  @media (max-width: 768px) {
+    .slide-nav-btn {
+      width: 24px;
+      height: 44px;
+    }
+    .slide-nav-btn svg {
+      width: 10px;
+      height: 24px;
+    }
+    #logo-link {
+      top: 10px;
+    }
+    #logo {
+      height: 31px;
+    }
+    .slide-title {
+      font-size: 5.5cqw;
+    }
+    .slide-subtitle {
+      font-size: 3.2cqw;
+    }
+    .slide:first-child .slide-subtitle,
+    .slide:nth-child(2) .slide-subtitle {
+      font-size: 3.5cqw;
+    }
+    .slide:first-child .slide-subtitle {
+      margin-top: 10cqw;
+    }
+    .slide-box-title {
+      font-size: 3.2cqw;
+    }
+    .slide-case-title {
+      font-size: 2cqw;
+    }
+    .slide-meta {
+      font-size: 2cqw;
+      margin-top: 10cqw;
+    }
+    .slide-two-col > .slide-two-col-left > .slide-case-title,
+    .slide-two-col > .slide-two-col-right > .slide-case-title {
+      font-size: 2.8cqw !important;
+    }
+    .underline-pink,
+    .underline-orange,
+    .underline-green {
+      text-decoration-thickness: 2px;
+    }
+    .slide-case {
+      border-top-width: 2px;
+    }
+    .slide-grid-cell {
+      border-left-width: 2px;
+    }
+    .slide-row {
+      border-left-width: 2px;
+    }
+    .slide-cases-footer {
+      border-left-width: 2px;
+    }
+  }
+</style>
+</head>
+<body>
+  <canvas id="wave-bg"></canvas>
+  <a href="#home" id="logo-link">
+    <img id="logo" src="public/COVAL Logo.png" alt="COVAL">
+  </a>
+
+  <!-- Page: Home -->
+  <div id="page-home" class="page">
+    <div id="slides">
+      <!-- <div class="slide slide-flex">
+        <div class="slide-title" style="max-width:100%">Sales & Business Development</div>
+        <div class="slide-toggle-wrap" style="margin-top:2.5cqw;">
+          <div class="slide-toggle slide-toggle-3" id="bd-toggle">
+            <div class="slide-toggle-option active" data-target="awareness">Awareness</div>
+            <div class="slide-toggle-option" data-target="consideration">Consideration</div>
+            <div class="slide-toggle-option" data-target="conversion">Conversion</div>
+            <div class="slide-toggle-slider"></div>
+          </div>
+          <div class="slide-toggle-content">
+            <div class="slide-toggle-panel active" id="bd-toggle-awareness">
+              <div class="slide-cases" style="margin-top:0; flex:none;">
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">SMB / Solo Devs</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Sign up for free trial</div>
+                </div>
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">Mid-Market / Enterprise</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Content marketing (Coval Voice AI 2026 Report, blog, etc.)</div>
+                  <div class="slide-case-desc">&#8226; SEO / Organic Traffic</div>
+                  <div class="slide-case-desc">&#8226; In-Person Events</div>
+                  <div class="slide-case-desc">&#8226; Word of Mouth</div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-toggle-panel" id="bd-toggle-consideration" style="display:none;">
+              <div class="slide-cases" style="margin-top:0; flex:none;">
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">SMB / Solo Devs</div>
+                </div>
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">Mid-Market / Enterprise</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Book a demo</div>
+                  <div class="slide-case-desc">&#8226; Partnerships and referrals</div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-toggle-panel" id="bd-toggle-conversion" style="display:none;">
+              <div class="slide-cases" style="margin-top:0; flex:none;">
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">SMB / Solo Devs</div>
+                </div>
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">Mid-Market / Enterprise</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="slide-number">1</span>
+      </div> -->
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Forward Deployment: Role & Scope</div>
+        <div class="slide-toggle-wrap" style="margin-top:2.5cqw;">
+          <div class="slide-toggle" id="role-toggle">
+            <div class="slide-toggle-option active" data-target="now">Now</div>
+            <div class="slide-toggle-option" data-target="future">Future</div>
+            <div class="slide-toggle-slider"></div>
+          </div>
+          <div class="slide-toggle-content">
+            <div class="slide-toggle-panel active" id="toggle-now">
+              <div style="display:flex; align-items:center; gap:1.5cqw;">
+                <div class="slide-case-title" style="font-size:3cqw;">Forward Deployed Engineer</div>
+                <div class="slide-dropdown" id="fde-dropdown">
+                  <div class="slide-dropdown-selected">Enterprise</div>
+                  <div class="slide-dropdown-arrow"></div>
+                  <div class="slide-dropdown-menu">
+                    <div class="slide-dropdown-item active" data-value="enterprise">Enterprise</div>
+                    <div class="slide-dropdown-item" data-value="mid-market">Mid-Market</div>
+                    <div class="slide-dropdown-item" data-value="internal">Internal</div>
+                  </div>
+                </div>
+              </div>
+              <div class="slide-dropdown-desc active" data-desc="enterprise" style="margin-top:1cqw">
+                <div class="slide-case-desc" style="font-size:1.8cqw;">Own the discovery of enterprise client operational workflow and technical implementation needs to drive pilot adoption and engagement of Coval platform to resolve customer pain points. Pair with a Coval Engineer if needed to extend Coval platform features to ensure technical success.</div>
+              </div>
+              <div class="slide-dropdown-desc" data-desc="mid-market" style="margin-top:1cqw; display:none;">
+                <div class="slide-case-desc" style="font-size:1.8cqw;">Serve as a technical and architectural advisor to mid-market teams, guiding them through the pre-observability phase. Partner with the teams to identify high-ROI use-cases and bridge knowledge gaps. Once the teams are operationally ready, these teams can be converted to customers.</div>
+              </div>
+              <div class="slide-dropdown-desc" data-desc="internal" style="margin-top:1cqw; display:none;">
+                <div class="slide-case-desc" style="font-size:1.8cqw;">Build internal workflows, documentation, and best practices to maximize client utilization and scale future deployments.</div>
+              </div>
+              <div style="height:2px; background:linear-gradient(to right, #999, #333); margin:1.5cqw 0 2.5cqw 0; flex-shrink:0;"></div>
+              <div class="slide-stacked-rows" id="rows-enterprise">
+                <div class="slide-row">
+                  <div class="slide-row-title">Project Alignment</div>
+                  <div class="slide-row-desc">Understand the client's goal, scope, and roles to ensure organizational buy-in and alignment on outcomes.</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Project Planning</div>
+                  <div class="slide-row-desc">Utilize an internal project management platform. Communicate stakeholder cadence, milestones, and project timeline.</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Success Metrics</div>
+                  <div class="slide-row-desc">Align with leadership and end users on business metrics that proves success. Gather baseline metrics to measure against post-project outcomes.</div>
+                </div>
+                <div class="slide-row" id="internal-tracking-row" style="display:none;">
+                  <div class="slide-row-title">Internal Tracking</div>
+                  <div class="slide-row-desc">Conduct stakeholder analysis (e.g. champions, blockers, etc.) to improve project efficiency and determine project risk. Provide a user feedback loop to engineering for fast product iteration.</div>
+                </div>
+              </div>
+              <div class="slide-stacked-rows" id="rows-mid-market" style="display:none;">
+                <div class="slide-row">
+                  <div class="slide-row-title">Needs Discovery</div>
+                  <div class="slide-row-desc">Take time to understand the existing pain points, budget size, and champions across teams that want to improve their customer-facing AI transformation strategy</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Client Advisory</div>
+                  <div class="slide-row-desc">Work directly with the mid-market client to put teams in touch with trusted partners to explore ways of transforming their customer support user experience.</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Agent Architect</div>
+                  <div class="slide-row-desc">Partner directly with mid-market clients to help build and deploy a production agent at little to no cost. This would be predicated on Coval moving up the stack and providing an out-of-the-box agent service to supplement existing customer service needs.</div>
+                </div>
+              </div>
+              <div class="slide-stacked-rows" id="rows-internal" style="display:none;">
+                <div class="slide-row">
+                  <div class="slide-row-title">Internal Tracking</div>
+                  <div class="slide-row-desc">Conduct stakeholder analysis (e.g. champions, blockers, etc.) to improve project efficiency and determine project risk. Provide a user feedback loop to engineering for fast product iteration.</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Build Automation</div>
+                  <div class="slide-row-desc">Work with internal Coval team members to automate administrative and manual project processes to improve future deployment speed.</div>
+                </div>
+                <div class="slide-row">
+                  <div class="slide-row-title">Playbook Iteration</div>
+                  <div class="slide-row-desc">Increase deployment speed by iterating on best practices and lessons learned from previous deployments through iterating and standardizing deployment playbooks across domains, use-cases, and integrations.</div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-toggle-panel" id="toggle-future" style="display:none;">
+              <div class="slide-case-desc" style="margin-bottom:3cqw; font-size:1.8cqw;"><strong>Scaling Future Deployments:</strong> Have dedicated forward-deployed pods where a Forward Deployed Engineer can be matched with multiple Deployment Strategists to scale technical support across multiple projects.</div>
+              <div class="slide-cases" style="margin-top:0; flex:none;">
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">Forward Deployed Engineer</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw; font-size:1.8cqw;">Owns the technical success across all post-sales Coval deployments.</div>
+                </div>
+                <div class="slide-case slide-case-toponly">
+                  <div class="slide-case-title">Deployment Strategist</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw; font-size:1.8cqw;">Owns the post-sales Coval client relationship and operational details for successful deployment.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="slide-number">1</span>
+      </div>
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Forward Deployment: Timeline & Checklist</div>
+        <div class="slide-meta" id="timeline-duration" style="margin-top:2.5cqw; font-size:2.5cqw;">Project Timeline: 4 Weeks</div>
+        <div class="slide-timeline">
+          <div class="slide-timeline-line-div"></div>
+          <div class="slide-timeline-nodes">
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">1</text></svg>
+              <div class="slide-timeline-label">Project Kickoff</div>
+            </div>
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">2</text></svg>
+              <div class="slide-timeline-label">Client Discovery</div>
+            </div>
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">3</text></svg>
+              <div class="slide-timeline-label" style="width:13cqw;">Build &amp; Demo Simulation</div>
+            </div>
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">4</text></svg>
+              <div class="slide-timeline-label">Train &amp; Scale Simulations</div>
+            </div>
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">5</text></svg>
+              <div class="slide-timeline-label">Production Testing Loop</div>
+            </div>
+            <div class="slide-timeline-node">
+              <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">6</text></svg>
+              <div class="slide-timeline-label" style="width:13cqw;">Customer Success Handoff</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-timeline-detail" style="margin-top:0;">
+          <div class="slide-dropdown" id="timeline-step-dropdown" style="border:none; padding:0; background:none; display:flex; align-items:center; gap:1.5cqw; cursor:pointer;">
+            <div class="slide-case-title" id="timeline-step-title" style="cursor:pointer; font-size:2.5cqw;">1. Project Kickoff</div>
+              <div class="slide-dropdown-arrow"></div>
+              <div class="slide-dropdown-menu">
+                <div class="slide-dropdown-item active" data-value="1">1. Project Kickoff</div>
+                <div class="slide-dropdown-item" data-value="2">2. Client Discovery</div>
+                <div class="slide-dropdown-item" data-value="3">3. Build &amp; Demo Simulation</div>
+                <div class="slide-dropdown-item" data-value="4">4. Train &amp; Scale Simulations</div>
+                <div class="slide-dropdown-item" data-value="5">5. Production Testing Loop</div>
+                <div class="slide-dropdown-item" data-value="6">6. Customer Success Handoff</div>
+              </div>
+          </div>
+          <div class="slide-checklist-week" id="timeline-step-week" style="font-family:'Inter',sans-serif; font-weight:400; font-size:1.3cqw; color:#666; margin-top:0.5cqw;">Week 1</div>
+          <div class="slide-checklist">
+            <div class="slide-checklist-panel active" data-step="1">
+              <label class="slide-checklist-item"><input type="checkbox"><span>Schedule kickoff meeting with relevant stakeholders</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Define stakeholder roles, "project team", project use-cases and scope, and business objectives.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Set future meeting cadence, review project milestones and timeline, generate weekly pilot status reports.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Build trust and organizational alignment across leadership and end users. Having an onsite helps.</span></label>
+            </div>
+            <div class="slide-checklist-panel" data-step="2" style="display:none;">
+              <div>
+                <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Operational</div>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Identify user-agent interaction workflow.</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Determine current-state team workflows for agent debugging and initial primary users from each team.</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Define success and failure taxonomy on user outcomes and impact on business outcomes.</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Gather baseline voice/chat agent metrics (latency, business metrics, etc.).</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Determine data compliance needs.</span></label>
+              </div>
+              <div>
+                <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Technical</div>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Understand existing voice AI stack / architecture (see playbook variations slide).</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Infrastructure access and integration preference (API, CLI, Coding Agent, MCP Client).</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Determine technical infrastructure and downstream systems for debugging.</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Environment differences across DEV/QA/STAGING/PROD.</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Understand existing technical guardrails around PII/PHI, data compliance and security requirements (HIPAA, GDPR, etc.).</span></label>
+              </div>
+            </div>
+            <div class="slide-checklist-panel" data-step="3" style="display:none;">
+              <label class="slide-checklist-item"><input type="checkbox"><span>Confirm and target a single high-impact agent use-case.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Prepare demo of agent simulation of the agent use-case in DEV/QA/STAGING</span></label>
+              <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Setup Agent connection, workflow graph, and knowledge bases.</span></label>
+              <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Request test cases to create Test Sets.</span></label>
+              <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Create 3-5 Personas.</span></label>
+              <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Set up Human Review workflows.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Test simulation and identify opportunties to improve client agent.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Present demo to Eng/PM/Ops stakeholders and showcase value proposition of simulations.</span></label>
+            </div>
+            <div class="slide-checklist-panel" data-step="4" style="display:none;">
+              <label class="slide-checklist-item"><input type="checkbox"><span>Conduct user training sessions and create necessary training artifacts.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Gather training and product feedback.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Partner with teams to build additional high-value primary use-cases in DEV/QA/STAGING environments.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Have engineering teams independently run simulations while refining workflows/conversation scripts and metrics.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Build templates to set up regression tests for the most critical use-cases, integrate tracing and simulations into CI/CD.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Determine which core use-cases should undergo Human Review.</span></label>
+            </div>
+            <div class="slide-checklist-panel" data-step="5" style="display:none;">
+              <label class="slide-checklist-item"><input type="checkbox"><span>Set up alerts and monitors for production agents to determine potential failure points.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Compare production telemtry against simulation benchamrks.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Construct a data-driven report showing what was uncovered in simulations, opportunities in production workflows.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Provide support and training on how to leverage production issues to improve simulations.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Present metrics that support improvements of initial business objectives.</span></label>
+            </div>
+            <div class="slide-checklist-panel" data-step="6" style="display:none;">
+              <label class="slide-checklist-item"><input type="checkbox"><span>Provide relevant pilot details in project management platform.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Schedule knowledge transfer and ownership call to Customer Success.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Produce additional metrics that support and expand business objectives.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Customer Success to conduct follow-up review with client and execute Expansion strategy.</span></label>
+            </div>
+          </div>
+        </div>
+        <span class="slide-number">2</span>
+      </div>
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Forward Deployment: Playbook Variations</div>
+        <div class="slide-cases" style="margin-top:2.5cqw; flex:none;">
+          <div class="slide-case slide-case-toponly">
+            <div style="display:flex; align-items:center; gap:1cqw;">
+              <div class="slide-case-title">Technical</div>
+              <div class="slide-dropdown" id="tech-modality-dropdown">
+                <div class="slide-dropdown-selected">Cascaded</div>
+                <div class="slide-dropdown-arrow"></div>
+                <div class="slide-dropdown-menu">
+                  <div class="slide-dropdown-item slide-dropdown-parent" data-value="voice">Voice &#9656;</div>
+                  <div class="slide-dropdown-drawer" data-parent="voice" style="display:none;">
+                    <div class="slide-dropdown-item slide-dropdown-sub active" data-value="basic-cascaded">Cascaded</div>
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="hybrid">Hybrid</div>
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="fused">Fused / Real-Time</div>
+                  </div>
+                  <div class="slide-dropdown-item slide-dropdown-parent" data-value="text">Text &#9656;</div>
+                  <div class="slide-dropdown-drawer" data-parent="text" style="display:none;">
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="chat-api">Chat API Endpoint</div>
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="chat-websocket">Chat WebSocket</div>
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="chat-a2a">Chat A2A</div>
+                    <div class="slide-dropdown-item slide-dropdown-sub" data-value="sms">SMS</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="slide-tech-checklist" id="tech-modality-checklist">
+              <div class="slide-tech-panel active" data-tech="basic-cascaded">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What orchestration framework is used (for telephony, transport, speech recognition/turn detection)?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>SST / TTS model provider and version</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>Is additional context captured for expression, tone, and prosody?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>LLM model provider and version</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What knowledge bases are connected and how?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>When are resources and tool calls made during the workflow and what tools are used?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What policies and guardrails are set up during the workflow and when/how are they executed?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What agent tracing platform are you using today?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What are specific use-cases leveraging this voice AI architecture.</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="hybrid" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What orchestration framework is used (for telephony, transport, speech recognition/turn detection)?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span style="color:#0A1F3B; font-weight:600;">Which components or processes are fused vs. cascaded?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span style="color:#0A1F3B; font-weight:600;">How is the context of fused processes stored?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>SST / TTS model provider and version</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>Is additional context captured for expression, tone, and prosody?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>LLM model provider and version</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What knowledge bases are connected and how?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>When are resources and tool calls made during the workflow and what tools are used?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What policies and guardrails are set up during the workflow and when/how are they executed?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What agent tracing platform are you using today?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What are specific use-cases leveraging this voice AI architecture.</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="fused" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>Are you using an orchestration framework or a direct connection? If direct connection, what type?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Realtime (S2S) or Duplex model provider and version</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>When are resources and tool calls made during the workflow and what tools are used?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What policies and guardrails are set up during the workflow and when/how are they executed?</span></label>
+                <label class="slide-checklist-item" style="margin-left:4cqw;"><input type="checkbox"><span>What agent tracing platform are you using today?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Specific use-cases leveraging this fused architecture.</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="chat-api" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the HTTP API endpoint URL and authorization format?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Does the chat agent require an initialization endpoint?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the expected request/response JSON format (will custom array be needed)?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Are there custom headers or payload wrappers needed?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>How does the agent signal conversation end (status: "ended" or other)?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Are there template variables needed for session/context management?</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="chat-websocket" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the wss:// endpoint URL and authorization format?</span></label>
+                <label class="slide-checklist-item"  style="margin-left:2cqw;"><input type="checkbox"><span>Does it require an HTTP-first session provisioning step before WebSocket connection?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the outbound message JSON format? (e.g. {"type": "message", "text": "{{message}}"})</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the inbound message format and how should agent responses be extracted?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Is there a handshake/ready signal before conversation starts?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Are there message batching requirements?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the concurrency limit? (Coval Max: 8 simultaneous WebSocket simulations)</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="chat-a2a" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the A2A JSON-RPC endpoint URL?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What authentication method is used? (OAuth2 client_credentials or static bearer token)</span></label>
+                <label class="slide-checklist-item"  style="margin-left:2cqw;"><input type="checkbox"><span>If OAuth2, what is the token exchange endpoint and payload format? (Form-encoded vs. JSON)</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the response message path? (default: result.artifacts.0.parts.0.text)</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>How are contextId and taskId managed across conversation turns?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What are the end state values for conversation termination? (Default: completed, failed)</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Is all response content serialized into parts[*].text? (Content outside JSON-RPC is invisible to simulators)</span></label>
+              </div>
+              <div class="slide-tech-panel" data-tech="sms" style="display:none;">
+                <label class="slide-checklist-item"><input type="checkbox"><span>What SMS gateway provider is used and how is it configured?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>What is the message format and character limits?</span></label>
+                <label class="slide-checklist-item" style="margin-left:2cqw;"><input type="checkbox"><span>Two-way or one-way communication?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What is the maximum expected conversation duration? (Coval max: 15 min per conversation)</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What concurrency is needed for parallel testing?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>What LLM/logic powers the chat agent responses?</span></label>
+                <label class="slide-checklist-item"><input type="checkbox"><span>Specific use-cases leveraging SMS agents.</span></label>
+              </div>
+            </div>
+          </div>
+          <div class="slide-case slide-case-toponly">
+            <div style="display:flex; align-items:center; gap:1cqw;">
+              <div class="slide-case-title">Domain Quick Reference</div>
+              <div class="slide-dropdown" id="domain-usecase-dropdown">
+                <div class="slide-dropdown-selected">Metrics</div>
+                <div class="slide-dropdown-arrow"></div>
+                <div class="slide-dropdown-menu">
+                  <div class="slide-dropdown-item active" data-value="metrics">Metrics</div>
+                  <div class="slide-dropdown-item" data-value="personas">Personas</div>
+                </div>
+              </div>
+            </div>
+            <div id="domain-metrics-panel" style="margin-top:1.5cqw;">
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Financial Services</div>
+              <div class="slide-case-desc">&#9656; Loan application resolution rate</div>
+              <div class="slide-case-desc">&#9656; Account verification containment rate</div>
+              <div class="slide-case-desc">&#9656; Fraud alert escalation accuracy</div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Healthcare</div>
+              <div class="slide-case-desc">&#9656; Appointment scheduling completion rate</div>
+              <div class="slide-case-desc">&#9656; Prescription refill containment rate</div>
+              <div class="slide-case-desc">&#9656; HIPAA compliance adherence score</div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Logistics</div>
+              <div class="slide-case-desc">&#9656; Shipment status inquiry resolution rate</div>
+              <div class="slide-case-desc">&#9656; Delivery rescheduling task completion</div>
+              <div class="slide-case-desc">&#9656; Claims processing escalation rate</div>
+            </div>
+            <div id="domain-personas-panel" style="margin-top:1.5cqw; display:none;">
+              <div class="slide-case-desc" style="margin-bottom:1cqw;"><em>Catalog most common/frequent personas across domains:</em></div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Financial Services</div>
+              <div class="slide-case-desc">&#9656; Frustrated customer disputing a fraudulent charge</div>
+              <div class="slide-case-desc">&#9656; First-time loan applicant confused about requirements</div>
+              <div class="slide-case-desc">&#9656; High-net-worth client requesting urgent transfer</div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Healthcare</div>
+              <div class="slide-case-desc">&#9656; Elderly patient needing medication guidance</div>
+              <div class="slide-case-desc">&#9656; Caregiver requesting a healthcare appointment</div>
+              <div class="slide-case-desc">&#9656; Spanish speaker requesting lab results</div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Logistics / eCommerce</div>
+              <div class="slide-case-desc">&#9656; Impatient customer with missing package</div>
+              <div class="slide-case-desc">&#9656; Frustrated customer requesting a refund for damaged item</div>
+              <div class="slide-case-desc">&#9656; International customer navigating customs delays</div>
+            </div>
+          </div>
+        </div>
+        <span class="slide-number">3</span>
+      </div>
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Customer Success Strategy</div>
+        <div class="slide-cases" style="margin-top:3cqw">
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Deepen Engagement</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Improve Coval stickiness and drive simulation usage:</em></strong></div>
+            <div class="slide-case-desc">&#9656; Create variations in agents to improve voice AI stack</div>
+            <div class="slide-case-desc">&#9656; Expand call types, personas, test sets, and templates to capture more edge cases</div>
+            <div class="slide-case-desc">&#9656; Build custom metrics, integrate tracing and mirror production using concurrency testing</div>
+            <div class="slide-case-desc">&#9656; Expand agent workflows and modalities to include text-based agents, other languages, etc.</div>
+            <div class="slide-case-desc">&#9656; Optimize monitors and expand usage across DEV/QA/PROD environments</div>
+          </div>
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Grow Team Adoption</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Expand usage and buy-in across client Eng/PM/Ops teams:</em></strong></div>
+            <div class="slide-case-desc">&#9656; Translate observability metrics to <span class="slide-tooltip" data-tip="Ex: Resolution Rate, Containment Rate, Task Completion, Escalation Rate, Compliance Adherence, Revenue Impact">business KPIs</span> to prove value, start with highest value workflow</div>
+            <div class="slide-case-desc">&#9656; Make value visible to budget decision-makers and leadership</div>
+            <div class="slide-case-desc">&#9656; Grow adoption across adjacent teams, source other pain points and use-cases</div>
+            <div class="slide-case-desc">&#9656; Integrate Human Review issues into client systems to reduce debugging time</div>
+            <div class="slide-case-desc">&#9656; Build behavior and action by setting a weekly cadence to review dashboards and training gaps</div>
+          </div>
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Support Retention</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Ensure continued Coval platform usage and client satisfaction:</em></strong></div>
+            <div class="slide-case-desc">&#9656; Prioritize client agent initiatives based on impact and strategic importance</div>
+            <div class="slide-case-desc">&#9656; Monitor simulation usage and adoption patterns to monitor account health and reduce potential churn</div>
+            <div class="slide-case-desc">&#9656; Setup power user feedback channels to help engineering quickly iterate product and reduce friction</div>
+            <div class="slide-case-desc">&#9656; Automate outreach for low-touch, smaller clients to scale customer success operations.</div>
+            <div class="slide-case-desc">&#9656; Grow with clients, partner with teams to help build more advanced voice and chat agents</div>
+          </div>
+        </div>
+        <span class="slide-number">4</span>
+      </div>
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Other Suggestions</div>
+        <div class="slide-cases" style="margin-top:3cqw">
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">ServiceNow Deployment</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong>Product:</strong> </div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong>Process:</strong></div>
+          </div>
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Other</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;">The "Documentation" hyperlink in the footer redirects to a page with a 404 error. This should be a quick URL fix.</div>
+          </div>
+        </div>
+        <span class="slide-number">5</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Page: Interviews -->
+  <div id="page-interviews" class="page"></div>
+
+  <!-- Page: Mentors -->
+  <div id="page-mentors" class="page"></div>
+
+  <!-- Page: Events -->
+  <div id="page-events" class="page"></div>
+
+  <!-- Page: Artifacts -->
+  <div id="page-playbooks" class="page"></div>
+
+  <script>
+    // Timeline step dropdown
+    (function() {
+      var dropdown = document.getElementById('timeline-step-dropdown');
+      if (!dropdown) return;
+      var title = document.getElementById('timeline-step-title');
+      var weekLabel = document.getElementById('timeline-step-week');
+      var weekMap = {1:'Week 1', 2:'Week 1', 3:'Week 2', 4:'Week 2-3', 5:'Week 3-4', 6:'Week 4'};
+      var items = dropdown.querySelectorAll('.slide-dropdown-item');
+      var nodes = document.querySelectorAll('.slide-timeline-node');
+      // Set initial active node
+      if (nodes.length > 0) nodes[0].classList.add('active');
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      items.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          title.textContent = item.textContent;
+          items.forEach(function(i) { i.classList.remove('active'); });
+          item.classList.add('active');
+          dropdown.classList.remove('open');
+          var val = parseInt(item.getAttribute('data-value'));
+          nodes.forEach(function(n) { n.classList.remove('active'); });
+          if (nodes[val - 1]) nodes[val - 1].classList.add('active');
+          if (weekLabel && weekMap[val]) weekLabel.textContent = weekMap[val];
+          var panels = document.querySelectorAll('.slide-checklist-panel');
+          panels.forEach(function(p) { p.classList.remove('active'); p.style.display = 'none'; });
+          var stepKey = '' + val;
+          var activePanel = document.querySelector('.slide-checklist-panel[data-step="' + stepKey + '"]');
+          if (activePanel) { activePanel.classList.add('active'); activePanel.style.display = 'grid'; }
+        });
+      });
+      nodes.forEach(function(node, idx) {
+        node.style.cursor = 'pointer';
+        node.addEventListener('click', function() {
+          var val = idx + 1;
+          items.forEach(function(i) { i.classList.remove('active'); });
+          if (items[idx]) items[idx].classList.add('active');
+          title.textContent = items[idx] ? items[idx].textContent : '';
+          nodes.forEach(function(n) { n.classList.remove('active'); });
+          node.classList.add('active');
+          if (weekLabel && weekMap[val]) weekLabel.textContent = weekMap[val];
+          var panels = document.querySelectorAll('.slide-checklist-panel');
+          panels.forEach(function(p) { p.classList.remove('active'); p.style.display = 'none'; });
+          var activePanel = document.querySelector('.slide-checklist-panel[data-step="' + val + '"]');
+          if (activePanel) { activePanel.classList.add('active'); activePanel.style.display = 'grid'; }
+        });
+      });
+      document.addEventListener('click', function() {
+        dropdown.classList.remove('open');
+      });
+    })();
+
+    // Tech modality dropdown
+    (function() {
+      var dropdown = document.getElementById('tech-modality-dropdown');
+      if (!dropdown) return;
+      var selected = dropdown.querySelector('.slide-dropdown-selected');
+      var parents = dropdown.querySelectorAll('.slide-dropdown-parent');
+      var subs = dropdown.querySelectorAll('.slide-dropdown-sub');
+      var drawers = dropdown.querySelectorAll('.slide-dropdown-drawer');
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      parents.forEach(function(parent) {
+        parent.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var val = parent.getAttribute('data-value');
+          drawers.forEach(function(d) {
+            if (d.getAttribute('data-parent') === val) {
+              d.style.display = d.style.display === 'none' ? 'block' : 'none';
+            } else {
+              d.style.display = 'none';
+            }
+          });
+        });
+      });
+      var techPanels = document.querySelectorAll('.slide-tech-panel');
+      subs.forEach(function(sub) {
+        sub.addEventListener('click', function(e) {
+          e.stopPropagation();
+          selected.textContent = sub.textContent;
+          subs.forEach(function(s) { s.classList.remove('active'); });
+          parents.forEach(function(p) { p.classList.remove('active'); });
+          sub.classList.add('active');
+          dropdown.classList.remove('open');
+          drawers.forEach(function(d) { d.style.display = 'none'; });
+          var val = sub.getAttribute('data-value');
+          techPanels.forEach(function(p) {
+            if (p.getAttribute('data-tech') === val) {
+              p.classList.add('active');
+              p.style.display = 'block';
+            } else {
+              p.classList.remove('active');
+              p.style.display = 'none';
+            }
+          });
+        });
+      });
+      document.addEventListener('click', function() { dropdown.classList.remove('open'); });
+    })();
+
+    // Domain use-case dropdown
+    (function() {
+      var dropdown = document.getElementById('domain-usecase-dropdown');
+      if (!dropdown) return;
+      var selected = dropdown.querySelector('.slide-dropdown-selected');
+      var items = dropdown.querySelectorAll('.slide-dropdown-item');
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      var metricsPanel = document.getElementById('domain-metrics-panel');
+      var personasPanel = document.getElementById('domain-personas-panel');
+      items.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          selected.textContent = item.textContent;
+          items.forEach(function(i) { i.classList.remove('active'); });
+          item.classList.add('active');
+          dropdown.classList.remove('open');
+          var val = item.getAttribute('data-value');
+          if (metricsPanel) metricsPanel.style.display = val === 'metrics' ? 'block' : 'none';
+          if (personasPanel) personasPanel.style.display = val === 'personas' ? 'block' : 'none';
+        });
+      });
+      document.addEventListener('click', function() { dropdown.classList.remove('open'); });
+    })();
+
+
+    // BD Toggle
+    (function() {
+      var toggle = document.getElementById('bd-toggle');
+      if (!toggle) return;
+      var panels = ['awareness', 'consideration', 'conversion'];
+      var options = toggle.querySelectorAll('.slide-toggle-option');
+      options.forEach(function(opt, idx) {
+        opt.addEventListener('click', function() {
+          var target = opt.getAttribute('data-target');
+          options.forEach(function(o) { o.classList.remove('active'); });
+          opt.classList.add('active');
+          toggle.classList.remove('future', 'pos-1', 'pos-2');
+          if (idx === 1) toggle.classList.add('pos-1');
+          if (idx === 2) toggle.classList.add('pos-2');
+          panels.forEach(function(p) {
+            document.getElementById('bd-toggle-' + p).style.display = p === target ? 'block' : 'none';
+          });
+        });
+      });
+    })();
+
+    // Custom dropdown
+    (function() {
+      var dropdown = document.getElementById('fde-dropdown');
+      if (!dropdown) return;
+      var selected = dropdown.querySelector('.slide-dropdown-selected');
+      var items = dropdown.querySelectorAll('.slide-dropdown-item');
+      dropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+      });
+      var descs = document.querySelectorAll('.slide-dropdown-desc');
+      items.forEach(function(item) {
+        item.addEventListener('click', function(e) {
+          e.stopPropagation();
+          selected.textContent = item.textContent;
+          items.forEach(function(i) { i.classList.remove('active'); });
+          item.classList.add('active');
+          dropdown.classList.remove('open');
+          var val = item.getAttribute('data-value');
+          descs.forEach(function(d) {
+            if (d.getAttribute('data-desc') === val) {
+              d.classList.add('active');
+              d.style.display = 'block';
+            } else {
+              d.classList.remove('active');
+              d.style.display = 'none';
+            }
+          });
+          var rowsEnterprise = document.getElementById('rows-enterprise');
+          var rowsMidMarket = document.getElementById('rows-mid-market');
+          var rowsInternal = document.getElementById('rows-internal');
+          if (rowsEnterprise) rowsEnterprise.style.display = val === 'enterprise' ? 'flex' : 'none';
+          if (rowsMidMarket) rowsMidMarket.style.display = val === 'mid-market' ? 'flex' : 'none';
+          if (rowsInternal) rowsInternal.style.display = val === 'internal' ? 'flex' : 'none';
+        });
+      });
+      document.addEventListener('click', function() {
+        dropdown.classList.remove('open');
+      });
+    })();
+
+    // Toggle
+    (function() {
+      var toggle = document.getElementById('role-toggle');
+      if (!toggle) return;
+      var options = toggle.querySelectorAll('.slide-toggle-option');
+      options.forEach(function(opt) {
+        opt.addEventListener('click', function() {
+          var target = opt.getAttribute('data-target');
+          options.forEach(function(o) { o.classList.remove('active'); });
+          opt.classList.add('active');
+          if (target === 'future') {
+            toggle.classList.add('future');
+          } else {
+            toggle.classList.remove('future');
+          }
+          var roleWrap = toggle.closest('.slide-toggle-wrap');
+          roleWrap.querySelectorAll('.slide-toggle-panel').forEach(function(p) { p.classList.remove('active'); p.style.display = 'none'; });
+          var panel = document.getElementById('toggle-' + target);
+          panel.classList.add('active');
+          panel.style.display = 'block';
+        });
+      });
+    })();
+
+    // Router
+    function navigate() {
+      var hash = location.hash.replace('#', '') || 'home';
+      var pages = document.querySelectorAll('.page');
+      pages.forEach(function(p) { p.classList.remove('active'); });
+      var target = document.getElementById('page-' + hash);
+      if (target) {
+        target.classList.add('active');
+      } else {
+        document.getElementById('page-home').classList.add('active');
+      }
+
+      // Update active menu item
+      var links = document.querySelectorAll('#menu a');
+      links.forEach(function(a) {
+        var linkHash = a.getAttribute('href').replace('#', '');
+        if (linkHash === hash) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('hashchange', navigate);
+    navigate();
+
+    // Slide navigation arrows
+    (function() {
+      var slides = document.querySelectorAll('.slide');
+      slides.forEach(function(slide, i) {
+        var wrapper = document.createElement('div');
+        wrapper.className = 'slide-wrapper';
+        slide.parentNode.insertBefore(wrapper, slide);
+        wrapper.appendChild(slide);
+
+        var nav = document.createElement('div');
+        nav.className = 'slide-nav';
+
+        if (i > 0) {
+          var upBtn = document.createElement('button');
+          upBtn.className = 'slide-nav-btn';
+          upBtn.innerHTML = '<svg viewBox="0 0 24 48" width="18" height="44" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><line x1="12" y1="44" x2="12" y2="8" fill="none"/><polygon points="6,16 12,4 18,16"/></svg>';
+          upBtn.onclick = function() {
+            var prevWrapper = wrapper.previousElementSibling;
+            if (prevWrapper) prevWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          };
+          nav.appendChild(upBtn);
+        }
+
+        if (i < slides.length - 1) {
+          var downBtn = document.createElement('button');
+          downBtn.className = 'slide-nav-btn';
+          downBtn.innerHTML = '<svg viewBox="0 0 24 48" width="18" height="44" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="miter"><line x1="12" y1="4" x2="12" y2="40" fill="none"/><polygon points="6,32 12,44 18,32"/></svg>';
+          downBtn.onclick = function() {
+            var nextWrapper = wrapper.nextElementSibling;
+            if (nextWrapper) nextWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          };
+          nav.appendChild(downBtn);
+        }
+
+        wrapper.appendChild(nav);
+      });
+    })();
+
+    // Wave background
+    (function() {
+      var canvas = document.getElementById('wave-bg');
+      var ctx = canvas.getContext('2d');
+      var lineCount = 18;
+      var seed = [];
+      for (var i = 0; i < lineCount; i++) {
+        seed.push({
+          amp: 40 + Math.random() * 120,
+          freq: 0.002 + Math.random() * 0.003,
+          phase: Math.random() * Math.PI * 2,
+          yOffset: (i / (lineCount - 1)) * 1.4 - 0.2,
+          speed: 0.0003 + Math.random() * 0.0006,
+          drift: 0.001 + Math.random() * 0.002,
+          opacity: 0.06 + Math.random() * 0.1
+        });
+      }
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function draw(t) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        var w = canvas.width;
+        var h = canvas.height;
+
+        for (var i = 0; i < lineCount; i++) {
+          var s = seed[i];
+          var baseY = h * s.yOffset;
+          ctx.beginPath();
+          for (var x = 0; x <= w; x += 2) {
+            var nx = x / w;
+            var envelope = Math.sin(nx * Math.PI);
+            var y = baseY
+              + Math.sin(x * s.freq + s.phase + t * s.speed) * s.amp * envelope
+              + Math.sin(x * s.freq * 2.3 + t * s.drift) * s.amp * 0.3 * envelope;
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.strokeStyle = 'rgba(180, 180, 180, ' + s.opacity + ')';
+          ctx.lineWidth = 0.6 + Math.random() * 0.3;
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(draw);
+      }
+      requestAnimationFrame(draw);
+    })();
+
+  </script>
+</body>
+</html>
