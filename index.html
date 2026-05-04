@@ -603,7 +603,7 @@
     left: 0.3cqw;
     width: calc(50% - 0.6cqw);
     height: calc(100% - 0.6cqw);
-    background: #1a1a1a;
+    background: #0A1F3B;
     border-radius: 1.7cqw;
     transition: transform 0.3s ease;
   }
@@ -740,7 +740,7 @@
   }
   .slide-checklist-item {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     gap: 0.8cqw;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -754,40 +754,11 @@
     opacity: 0.5;
   }
   .slide-checklist-item input[type="checkbox"] {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 1.1cqw;
-    height: 1.1cqw;
-    min-width: 1.1cqw;
-    min-height: 1.1cqw;
-    max-width: 1.1cqw;
-    max-height: 1.1cqw;
-    aspect-ratio: 1 / 1;
-    border: 1.5px solid #1a1a1a;
-    border-radius: 2px;
-    background: #fff;
-    cursor: pointer;
+    width: clamp(6px, 0.65vw, 10px);
+    height: clamp(6px, 0.65vw, 10px);
     flex-shrink: 0;
-    flex-grow: 0;
-    margin-top: 0.15cqw;
-    padding: 0;
-    box-sizing: content-box;
-    position: relative;
-  }
-  .slide-checklist-item input[type="checkbox"]:checked {
-    background: #1a1a1a;
-  }
-  .slide-checklist-item input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 25%;
-    top: 10%;
-    width: 35%;
-    height: 60%;
-    border: solid #fff;
-    border-width: 0 1.5px 1.5px 0;
-    transform: rotate(45deg);
+    cursor: pointer;
+    accent-color: #1a1a1a;
   }
   .slide-number {
     position: absolute;
@@ -808,13 +779,16 @@
       height: 24px;
     }
     #logo-link {
-      top: 10px;
+      top: 15px;
     }
     #logo {
       height: 31px;
     }
+    .page {
+      padding-top: 60px;
+    }
     .slide-title {
-      font-size: 5.5cqw;
+      font-size: 3.5cqw;
     }
     .slide-subtitle {
       font-size: 3.2cqw;
@@ -856,6 +830,20 @@
     }
     .slide-cases-footer {
       border-left-width: 2px;
+    }
+    .slide-checklist-item input[type="checkbox"] {
+      width: 4px;
+      height: 4px;
+      min-width: 4px;
+      min-height: 4px;
+      max-width: 4px;
+      max-height: 4px;
+      border-width: 0.5px;
+      border-radius: 0;
+    }
+    .slide-checklist-item {
+      padding: 0.2cqw 0;
+      align-items: flex-start;
     }
   }
 </style>
@@ -1042,7 +1030,7 @@
             </div>
             <div class="slide-timeline-node">
               <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">5</text></svg>
-              <div class="slide-timeline-label">Production Testing Loop</div>
+              <div class="slide-timeline-label">Production-Testing Loop</div>
             </div>
             <div class="slide-timeline-node">
               <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">6</text></svg>
@@ -1059,7 +1047,7 @@
                 <div class="slide-dropdown-item" data-value="2">2. Client Discovery</div>
                 <div class="slide-dropdown-item" data-value="3">3. Build &amp; Demo Simulation</div>
                 <div class="slide-dropdown-item" data-value="4">4. Train &amp; Scale Simulations</div>
-                <div class="slide-dropdown-item" data-value="5">5. Production Testing Loop</div>
+                <div class="slide-dropdown-item" data-value="5">5. Production-Testing Loop</div>
                 <div class="slide-dropdown-item" data-value="6">6. Customer Success Handoff</div>
               </div>
           </div>
@@ -1222,45 +1210,14 @@
             </div>
           </div>
           <div class="slide-case slide-case-toponly">
-            <div style="display:flex; align-items:center; gap:1cqw;">
-              <div class="slide-case-title">Domain Quick Reference</div>
-              <div class="slide-dropdown" id="domain-usecase-dropdown">
-                <div class="slide-dropdown-selected">Metrics</div>
-                <div class="slide-dropdown-arrow"></div>
-                <div class="slide-dropdown-menu">
-                  <div class="slide-dropdown-item active" data-value="metrics">Metrics</div>
-                  <div class="slide-dropdown-item" data-value="personas">Personas</div>
-                </div>
-              </div>
-            </div>
-            <div id="domain-metrics-panel" style="margin-top:1.5cqw;">
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Financial Services</div>
-              <div class="slide-case-desc">&#9656; Loan application resolution rate</div>
-              <div class="slide-case-desc">&#9656; Account verification containment rate</div>
-              <div class="slide-case-desc">&#9656; Fraud alert escalation accuracy</div>
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Healthcare</div>
-              <div class="slide-case-desc">&#9656; Appointment scheduling completion rate</div>
-              <div class="slide-case-desc">&#9656; Prescription refill containment rate</div>
-              <div class="slide-case-desc">&#9656; HIPAA compliance adherence score</div>
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Logistics</div>
-              <div class="slide-case-desc">&#9656; Shipment status inquiry resolution rate</div>
-              <div class="slide-case-desc">&#9656; Delivery rescheduling task completion</div>
-              <div class="slide-case-desc">&#9656; Claims processing escalation rate</div>
-            </div>
-            <div id="domain-personas-panel" style="margin-top:1.5cqw; display:none;">
-              <div class="slide-case-desc" style="margin-bottom:1cqw;"><em>Catalog most common/frequent personas across domains:</em></div>
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Financial Services</div>
+            <div class="slide-case-title">Domain Quick Reference</div>
+            <div id="domain-personas-panel" style="margin-top:1.5cqw;">
+              <div class="slide-case-desc" style="margin-bottom:1cqw;"> &#9656; <strong>Short-Term:</strong> Catalog most common personas/metrics across domains, allow for Coval deployment teams to quickly access playbook information via query.</div>
+              <div class="slide-case-desc" style="margin-bottom:1cqw;"> &#9656; <strong>Long-Term:</strong> Run clustering analyses or leverage supervised learning techniques to determine which personas and metrics across past deployments lead to high usage patterns and perform best for specific metrics and use-cases.</div>
+              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw;">Domain Persona Example: Financial Services</div>
               <div class="slide-case-desc">&#9656; Frustrated customer disputing a fraudulent charge</div>
               <div class="slide-case-desc">&#9656; First-time loan applicant confused about requirements</div>
               <div class="slide-case-desc">&#9656; High-net-worth client requesting urgent transfer</div>
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Healthcare</div>
-              <div class="slide-case-desc">&#9656; Elderly patient needing medication guidance</div>
-              <div class="slide-case-desc">&#9656; Caregiver requesting a healthcare appointment</div>
-              <div class="slide-case-desc">&#9656; Spanish speaker requesting lab results</div>
-              <div class="slide-case-title" style="font-size:1.6cqw; margin-bottom:0.5cqw; margin-top:1cqw;">Logistics / eCommerce</div>
-              <div class="slide-case-desc">&#9656; Impatient customer with missing package</div>
-              <div class="slide-case-desc">&#9656; Frustrated customer requesting a refund for damaged item</div>
-              <div class="slide-case-desc">&#9656; International customer navigating customs delays</div>
             </div>
           </div>
         </div>
@@ -1282,7 +1239,7 @@
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">Grow Team Adoption</div>
             <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Expand usage and buy-in across client Eng/PM/Ops teams:</em></strong></div>
-            <div class="slide-case-desc">&#9656; Translate observability metrics to <span class="slide-tooltip" data-tip="Ex: Resolution Rate, Containment Rate, Task Completion, Escalation Rate, Compliance Adherence, Revenue Impact">business KPIs</span> to prove value, start with highest value workflow</div>
+            <div class="slide-case-desc">&#9656; Continue to translate observability metrics to <span class="slide-tooltip" data-tip="Ex: Resolution Rate, Containment Rate, Task Completion, Escalation Rate, Compliance Adherence, Revenue Impact">business KPIs</span> to prove value, start with highest value workflow</div>
             <div class="slide-case-desc">&#9656; Make value visible to budget decision-makers and leadership</div>
             <div class="slide-case-desc">&#9656; Grow adoption across adjacent teams, source other pain points and use-cases</div>
             <div class="slide-case-desc">&#9656; Integrate Human Review issues into client systems to reduce debugging time</div>
@@ -1302,16 +1259,23 @@
       </div>
 
       <div class="slide slide-flex">
-        <div class="slide-title slide-title-full">Other Suggestions</div>
+        <div class="slide-title slide-title-full">Other Ideas</div>
         <div class="slide-cases" style="margin-top:3cqw">
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">ServiceNow Deployment</div>
-            <div class="slide-case-desc" style="margin-top:1cqw;"><strong>Product:</strong> </div>
-            <div class="slide-case-desc" style="margin-top:1cqw;"><strong>Process:</strong></div>
+            <div class="slide-case-desc" style="margin-top:1cqw;">Allow for organizational visibility across ServiceNow deployments within Coval and ensure power user mindshare within ServiceNow teams supporting client deployments.</div>
+            <div class="slide-case-title" style="font-size:2cqw; margin-top:1.5cqw;">Product</div>
+            <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+            <div class="slide-case-desc">&#9656; For a single "Organization" (ServiceNow), a user should be able to create separate "Workspaces," with multiple child "Projects."</div>
+            <div class="slide-case-desc">&#9656; User permissions can live at the "Organization" level, while Roles can be created and assigned down to the project-level.</div>
+            <div class="slide-case-title" style="font-size:2cqw; margin-top:1.5cqw;">Process</div>
+            <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+            <div class="slide-case-desc">&#9656; Integrate ServiceNow infrastructure team members into subsequent ServiceNow deployments.</div>
+            <div class="slide-case-desc">&#9656; Leverage Domain Quick Reference suggestions to help scale deployments.</div>
           </div>
           <div class="slide-case slide-case-toponly">
-            <div class="slide-case-title">Other</div>
-            <div class="slide-case-desc" style="margin-top:1cqw;">The "Documentation" hyperlink in the footer redirects to a page with a 404 error. This should be a quick URL fix.</div>
+            <div class="slide-case-title">Minor Improvements</div>
+            <div class="slide-case-desc" style="margin-top:1cqw;">The current "<a href="https://docs.coval.dev/login?redirect=%2F" target="_blank" style="color:#0A1F3B;">Documentation</a>" hyperlink in the footer redirects to a page with a 404 error. Perhaps a quick URL fix?</div>
           </div>
         </div>
         <span class="slide-number">5</span>
