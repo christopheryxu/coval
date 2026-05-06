@@ -760,6 +760,20 @@
     cursor: pointer;
     accent-color: #1a1a1a;
   }
+  .slide-accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  .slide-accordion-icon {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 2.5cqw;
+    line-height: 1;
+    color: #1a1a1a;
+    user-select: none;
+  }
   .slide-number {
     position: absolute;
     bottom: 1.5cqw;
@@ -857,8 +871,8 @@
   <!-- Page: Home -->
   <div id="page-home" class="page">
     <div id="slides">
-      <!-- <div class="slide slide-flex">
-        <div class="slide-title" style="max-width:100%">Sales & Business Development</div>
+      <div class="slide slide-flex">
+        <div class="slide-title" style="max-width:100%">Demand & Lead Generation</div>
         <div class="slide-toggle-wrap" style="margin-top:2.5cqw;">
           <div class="slide-toggle slide-toggle-3" id="bd-toggle">
             <div class="slide-toggle-option active" data-target="awareness">Awareness</div>
@@ -870,44 +884,136 @@
             <div class="slide-toggle-panel active" id="bd-toggle-awareness">
               <div class="slide-cases" style="margin-top:0; flex:none;">
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">SMB / Solo Devs</div>
-                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Sign up for free trial</div>
+                  <div class="slide-case-title">Current</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Content marketing (Blog, etc.)</div>
+                  <div class="slide-case-desc">&#9656; SEO / Organic Traffic</div>
+                  <div class="slide-case-desc">&#9656; In-Person Events (Hackathons, Happy Hours, etc.)</div>
+                  <div class="slide-case-desc">&#9656; Limited Social Media (Brooke's posts)</div>
+                  <div class="slide-case-desc">&#9656; Word of Mouth</div>
                 </div>
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">Mid-Market / Enterprise</div>
-                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Content marketing (Coval Voice AI 2026 Report, blog, etc.)</div>
-                  <div class="slide-case-desc">&#8226; SEO / Organic Traffic</div>
-                  <div class="slide-case-desc">&#8226; In-Person Events</div>
-                  <div class="slide-case-desc">&#8226; Word of Mouth</div>
+                  <div class="slide-case-title">Future Ideas</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Advertising campaigns (across different forms of media)</div>
+                  <div class="slide-case-desc">&#9656; Social media (LinkedIn, X, etc.), newsletter, podcast (other forms of content distribution)</div>
+                  <div class="slide-case-desc">&#9656; Domain-specific webinars</div>
+                  <div class="slide-case-desc">&#9656; Observability event conference exhibitions (e.g., LangChain Interrupt)</div>
+                  <div class="slide-case-desc">&#9656; Landing page updates (enterprise customer logos, customer testimonials, etc.)</div>
                 </div>
               </div>
             </div>
             <div class="slide-toggle-panel" id="bd-toggle-consideration" style="display:none;">
               <div class="slide-cases" style="margin-top:0; flex:none;">
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">SMB / Solo Devs</div>
-                </div>
+                  <div class="slide-case-title">Current</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Book a demo</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Content marketing (Coval Voice AI 2026 Report, whitepapers, etc.)</div>                </div>
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">Mid-Market / Enterprise</div>
-                  <div class="slide-case-desc" style="margin-top:1cqw;">&#8226; Book a demo</div>
-                  <div class="slide-case-desc">&#8226; Partnerships and referrals</div>
+                  <div class="slide-case-title">Future Ideas</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Coval developer community / help forum (Discord, Slack, etc.)</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Authoritative research</div>
+                  <div class="slide-case-desc">&#9656; Benchmark development</div>
+                  <div class="slide-case-desc">&#9656; Interactive training academies (self-paced learning with video tutorials, hands-on projects, etc.)</div>
                 </div>
               </div>
             </div>
             <div class="slide-toggle-panel" id="bd-toggle-conversion" style="display:none;">
               <div class="slide-cases" style="margin-top:0; flex:none;">
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">SMB / Solo Devs</div>
+                  <div class="slide-case-title">Current</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Sign up for free trial</div>
+                  <div class="slide-case-desc">&#9656; Partnerships and referrals</div>
                 </div>
                 <div class="slide-case slide-case-toponly">
-                  <div class="slide-case-title">Mid-Market / Enterprise</div>
+                  <div class="slide-case-title">Future Ideas</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Improve agent discovery</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Provide simulation credits program for startups / SMB</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Build integration ecosystem and extensibility to other apps</div>
+                  <div class="slide-case-desc" style="margin-top:1cqw;">&#9656; Expand product features (improve multilingual capability, etc.)</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <span class="slide-number">1</span>
-      </div> -->
+      </div>
+
+      <div class="slide slide-flex">
+        <div class="slide-title slide-title-full">Strategic Sales & Partnerships</div>
+        <div class="slide-cases" style="margin-top:2.5cqw; flex:none;">
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Sales</div>
+            <div class="slide-accordion">
+              <div class="slide-accordion-header" style="margin-top:1.5cqw;">
+                <div class="slide-case-title" style="font-size:2cqw;">SMB Voice AI Platforms</div>
+                <span class="slide-accordion-icon">+</span>
+              </div>
+              <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+              <div class="slide-accordion-body" style="display:none;">
+                <div class="slide-case-desc">&#9656; <a href="https://www.avoca.ai/" target="_blank" style="color:#0A1F3B;">Avoca</a>: Voice AI for Home Services</div>
+                <div class="slide-case-desc">&#9656; <a href="https://maple.inc/" target="_blank" style="color:#0A1F3B;">Maple</a>: Voice AI for Restaurants</div>
+                <div class="slide-case-desc">&#9656; <a href="https://www.heidihealth.com/en-us/comms" target="_blank" style="color:#0A1F3B;">Heidi Health</a>: Voice AI for Healthcare</div>
+              </div>
+            </div>
+            <div class="slide-accordion">
+              <div class="slide-accordion-header" style="margin-top:1.5cqw;">
+                <div class="slide-case-title" style="font-size:2cqw;">Enterprise AI Voice / Contact Center</div>
+                <span class="slide-accordion-icon">+</span>
+              </div>
+              <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+              <div class="slide-accordion-body" style="display:none;">
+                <div class="slide-case-desc">&#9656; <a href="https://www.parloa.com/" target="_blank" style="color:#0A1F3B;">Parloa</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://elevenlabs.io/agents" target="_blank" style="color:#0A1F3B;">ElevenAgents</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://sierra.ai/" target="_blank" style="color:#0A1F3B;">Sierra</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://decagon.ai/" target="_blank" style="color:#0A1F3B;">Decagon</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://fin.ai/" target="_blank" style="color:#0A1F3B;">Intercom (Fin)</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://cresta.com/" target="_blank" style="color:#0A1F3B;">Cresta</a></div> 
+                <div class="slide-case-desc">&#9656; <a href="https://giga.ai/" target="_blank" style="color:#0A1F3B;">Giga</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://www.genesys.com/" target="_blank" style="color:#0A1F3B;">Genesys</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://www.five9.com/" target="_blank" style="color:#0A1F3B;">Five9</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="slide-case slide-case-toponly">
+            <div class="slide-case-title">Partnerships</div>
+            <div class="slide-accordion">
+              <div class="slide-accordion-header" style="margin-top:1.5cqw;">
+                <div class="slide-case-title" style="font-size:2cqw;">Omnichannel CX Support Platforms</div>
+                <span class="slide-accordion-icon">+</span>
+              </div>
+              <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+              <div class="slide-accordion-body" style="display:none;">
+                <div class="slide-case-desc">&#9656; <a href="https://www.zendesk.com/" target="_blank" style="color:#0A1F3B;">Zendesk</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://www.kustomer.com/" target="_blank" style="color:#0A1F3B;">Kustomer</a></div>
+                <div class="slide-case-desc">&#9656; <a href="https://www.usepylon.com/" target="_blank" style="color:#0A1F3B;">Pylon</a></div>
+              </div>
+            </div>
+            <div class="slide-accordion">
+              <div class="slide-accordion-header" style="margin-top:1.5cqw;">
+                <div class="slide-case-title" style="font-size:2cqw;">ISV Ecosystems</div>
+                <span class="slide-accordion-icon">+</span>
+              </div>
+              <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+              <div class="slide-accordion-body" style="display:none;">
+                <div class="slide-case-desc">&#9656; Zoom &#10003;</div>
+                <div class="slide-case-desc">&#9656; Cisco &#10003;</div>
+              </div>
+            </div>
+            <div class="slide-accordion">
+              <div class="slide-accordion-header" style="margin-top:1.5cqw;">
+                <div class="slide-case-title" style="font-size:2cqw;">Global System Integrator</div>
+                <span class="slide-accordion-icon">+</span>
+              </div>
+              <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
+              <div class="slide-accordion-body" style="display:none;">
+                <div class="slide-case-desc">&#9656; Accenture</div>
+                <div class="slide-case-desc">&#9656; Deloitte</div>
+                <div class="slide-case-desc">&#9656; Capgemini</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="slide-number">2</span>
+      </div>
 
       <div class="slide slide-flex">
         <div class="slide-title slide-title-full">Forward Deployment: Role & Scope</div>
@@ -954,10 +1060,6 @@
                   <div class="slide-row-title">Success Metrics</div>
                   <div class="slide-row-desc">Align with leadership and end users on business metrics that proves success. Gather baseline metrics to measure against post-project outcomes.</div>
                 </div>
-                <div class="slide-row" id="internal-tracking-row" style="display:none;">
-                  <div class="slide-row-title">Internal Tracking</div>
-                  <div class="slide-row-desc">Conduct stakeholder analysis (e.g. champions, blockers, etc.) to improve project efficiency and determine project risk. Provide a user feedback loop to engineering for fast product iteration.</div>
-                </div>
               </div>
               <div class="slide-stacked-rows" id="rows-mid-market" style="display:none;">
                 <div class="slide-row">
@@ -976,7 +1078,7 @@
               <div class="slide-stacked-rows" id="rows-internal" style="display:none;">
                 <div class="slide-row">
                   <div class="slide-row-title">Internal Tracking</div>
-                  <div class="slide-row-desc">Conduct stakeholder analysis (e.g. champions, blockers, etc.) to improve project efficiency and determine project risk. Provide a user feedback loop to engineering for fast product iteration.</div>
+                  <div class="slide-row-desc">Conduct stakeholder analysis (e.g. champions, blockers, etc.) to improve project efficiency and determine project risk. Provide a user feedback loop to engineering for fast product iteration. Run internal QBRs.</div>
                 </div>
                 <div class="slide-row">
                   <div class="slide-row-title">Build Automation</div>
@@ -1003,11 +1105,11 @@
             </div>
           </div>
         </div>
-        <span class="slide-number">1</span>
+        <span class="slide-number">3</span>
       </div>
 
       <div class="slide slide-flex">
-        <div class="slide-title slide-title-full">Forward Deployment: Timeline & Checklist</div>
+        <div class="slide-title slide-title-full">Forward Deployment: Enterprise</div>
         <div class="slide-meta" id="timeline-duration" style="margin-top:2.5cqw; font-size:2.5cqw;">Project Timeline: 4 Weeks</div>
         <div class="slide-timeline">
           <div class="slide-timeline-line-div"></div>
@@ -1110,7 +1212,7 @@
             </div>
           </div>
         </div>
-        <span class="slide-number">2</span>
+        <span class="slide-number">4</span>
       </div>
 
       <div class="slide slide-flex">
@@ -1221,7 +1323,7 @@
             </div>
           </div>
         </div>
-        <span class="slide-number">3</span>
+        <span class="slide-number">5</span>
       </div>
 
       <div class="slide slide-flex">
@@ -1229,33 +1331,33 @@
         <div class="slide-cases" style="margin-top:3cqw">
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">Deepen Engagement</div>
-            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Improve Coval stickiness and drive simulation usage:</em></strong></div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Improve Coval stickiness and deepen simulation usage:</em></strong></div>
             <div class="slide-case-desc">&#9656; Create variations in agents to improve voice AI stack</div>
             <div class="slide-case-desc">&#9656; Expand call types, personas, test sets, and templates to capture more edge cases</div>
             <div class="slide-case-desc">&#9656; Build custom metrics, integrate tracing and mirror production using concurrency testing</div>
-            <div class="slide-case-desc">&#9656; Expand agent workflows and modalities to include text-based agents, other languages, etc.</div>
+            <div class="slide-case-desc">&#9656; Expand agent workflows and modalities to include text-based agents, other languages, custom workflows, etc.</div>
             <div class="slide-case-desc">&#9656; Optimize monitors and expand usage across DEV/QA/PROD environments</div>
           </div>
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">Grow Team Adoption</div>
             <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Expand usage and buy-in across client Eng/PM/Ops teams:</em></strong></div>
-            <div class="slide-case-desc">&#9656; Continue to translate observability metrics to <span class="slide-tooltip" data-tip="Ex: Resolution Rate, Containment Rate, Task Completion, Escalation Rate, Compliance Adherence, Revenue Impact">business KPIs</span> to prove value, start with highest value workflow</div>
-            <div class="slide-case-desc">&#9656; Make value visible to budget decision-makers and leadership</div>
+            <div class="slide-case-desc">&#9656; Continue to translate observability metrics to <span class="slide-tooltip" data-tip="Ex: Resolution Rate, Containment Rate, Task Completion, Escalation Rate, Compliance Adherence, Revenue Impact">business KPIs</span> to prove value, focus on high-value workflows</div>
             <div class="slide-case-desc">&#9656; Grow adoption across adjacent teams, source other pain points and use-cases</div>
             <div class="slide-case-desc">&#9656; Integrate Human Review issues into client systems to reduce debugging time</div>
             <div class="slide-case-desc">&#9656; Build behavior and action by setting a weekly cadence to review dashboards and training gaps</div>
+            <div class="slide-case-desc">&#9656; Make value visible to budget decision-makers and leadership</div>
           </div>
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">Support Retention</div>
-            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Ensure continued Coval platform usage and client satisfaction:</em></strong></div>
+            <div class="slide-case-desc" style="margin-top:1cqw;"><strong><em>Continue Coval platform enablement and client satisfaction:</em></strong></div>
             <div class="slide-case-desc">&#9656; Prioritize client agent initiatives based on impact and strategic importance</div>
             <div class="slide-case-desc">&#9656; Monitor simulation usage and adoption patterns to monitor account health and reduce potential churn</div>
             <div class="slide-case-desc">&#9656; Setup power user feedback channels to help engineering quickly iterate product and reduce friction</div>
-            <div class="slide-case-desc">&#9656; Automate outreach for low-touch, smaller clients to scale customer success operations.</div>
-            <div class="slide-case-desc">&#9656; Grow with clients, partner with teams to help build more advanced voice and chat agents</div>
+            <div class="slide-case-desc">&#9656; Automate outreach for smaller, low-touch clients to scale customer success operations.</div>
+            <div class="slide-case-desc">&#9656; Run QBRs with clients, partner with teams to help build more advanced voice and chat agents</div>
           </div>
         </div>
-        <span class="slide-number">4</span>
+        <span class="slide-number">6</span>
       </div>
 
       <div class="slide slide-flex">
@@ -1278,7 +1380,7 @@
             <div class="slide-case-desc" style="margin-top:1cqw;">The current "<a href="https://docs.coval.dev/login?redirect=%2F" target="_blank" style="color:#0A1F3B;">Documentation</a>" hyperlink in the footer redirects to a page with a 404 error. Perhaps a quick URL fix?</div>
           </div>
         </div>
-        <span class="slide-number">5</span>
+        <span class="slide-number">7</span>
       </div>
 
     </div>
@@ -1428,6 +1530,26 @@
       document.addEventListener('click', function() { dropdown.classList.remove('open'); });
     })();
 
+
+
+    // Accordion
+    (function() {
+      var headers = document.querySelectorAll('.slide-accordion-header');
+      headers.forEach(function(header) {
+        header.addEventListener('click', function() {
+          var accordion = header.parentElement;
+          var body = accordion.querySelector('.slide-accordion-body');
+          var icon = header.querySelector('.slide-accordion-icon');
+          if (body.style.display === 'none') {
+            body.style.display = 'block';
+            icon.textContent = '−';
+          } else {
+            body.style.display = 'none';
+            icon.textContent = '+';
+          }
+        });
+      });
+    })();
 
     // BD Toggle
     (function() {
