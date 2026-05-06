@@ -1057,8 +1057,8 @@
                   <div class="slide-row-desc">Utilize an internal project management platform. Communicate stakeholder cadence, milestones, and project timeline.</div>
                 </div>
                 <div class="slide-row">
-                  <div class="slide-row-title">Success Metrics</div>
-                  <div class="slide-row-desc">Align with leadership and end users on business metrics that proves success. Gather baseline metrics to measure against post-project outcomes.</div>
+                  <div class="slide-row-title">Success Partner</div>
+                  <div class="slide-row-desc">Align with leadership and end users on business metrics that proves success. Gather baseline metrics to measure against post-project outcomes. Advise enterprise teams on how best to best adopt Coval based on existing system architecture and AI agent production use-cases.</div>
                 </div>
               </div>
               <div class="slide-stacked-rows" id="rows-mid-market" style="display:none;">
@@ -1110,7 +1110,7 @@
 
       <div class="slide slide-flex">
         <div class="slide-title slide-title-full">Forward Deployment: Enterprise</div>
-        <div class="slide-meta" id="timeline-duration" style="margin-top:2.5cqw; font-size:2.5cqw;">Project Timeline: 4 Weeks</div>
+        <div class="slide-meta" id="timeline-duration" style="margin-top:2.5cqw; font-size:2.5cqw;">Project Timeline: 6 Weeks</div>
         <div class="slide-timeline">
           <div class="slide-timeline-line-div"></div>
           <div class="slide-timeline-nodes">
@@ -1128,7 +1128,7 @@
             </div>
             <div class="slide-timeline-node">
               <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">4</text></svg>
-              <div class="slide-timeline-label">Train &amp; Scale Simulations</div>
+              <div class="slide-timeline-label">Train Users &amp; Scale Simulations</div>
             </div>
             <div class="slide-timeline-node">
               <svg class="slide-timeline-num" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50"/><text x="50" y="50" text-anchor="middle" dy="0.35em" fill="#fff" font-family="Inter, sans-serif" font-weight="600" font-size="46">5</text></svg>
@@ -1148,7 +1148,7 @@
                 <div class="slide-dropdown-item active" data-value="1">1. Project Kickoff</div>
                 <div class="slide-dropdown-item" data-value="2">2. Client Discovery</div>
                 <div class="slide-dropdown-item" data-value="3">3. Build &amp; Demo Simulation</div>
-                <div class="slide-dropdown-item" data-value="4">4. Train &amp; Scale Simulations</div>
+                <div class="slide-dropdown-item" data-value="4">4. Train Users &amp; Scale Simulations</div>
                 <div class="slide-dropdown-item" data-value="5">5. Production-Testing Loop</div>
                 <div class="slide-dropdown-item" data-value="6">6. Customer Success Handoff</div>
               </div>
@@ -1195,7 +1195,8 @@
               <label class="slide-checklist-item"><input type="checkbox"><span>Gather training and product feedback.</span></label>
               <label class="slide-checklist-item"><input type="checkbox"><span>Partner with teams to build additional high-value primary use-cases in DEV/QA/STAGING environments.</span></label>
               <label class="slide-checklist-item"><input type="checkbox"><span>Have engineering teams independently run simulations while refining workflows/conversation scripts and metrics.</span></label>
-              <label class="slide-checklist-item"><input type="checkbox"><span>Build templates to set up regression tests for the most critical use-cases, integrate tracing and production-like simulations into CI/CD.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Build templates to set up production-like regression and load tests for the most critical use-cases, integrate tracing and simulations into CI/CD.</span></label>
+              <label class="slide-checklist-item"><input type="checkbox"><span>Catalog adversarial scenarios and edge cases.</span></label>
               <label class="slide-checklist-item"><input type="checkbox"><span>Determine which core use-cases should undergo Human Review.</span></label>
             </div>
             <div class="slide-checklist-panel" data-step="5" style="display:none;">
@@ -1316,7 +1317,7 @@
           <div class="slide-case slide-case-toponly">
             <div class="slide-case-title">Internal Quick Reference Guide</div>
             <div id="domain-personas-panel" style="margin-top:1.5cqw;">
-              <div class="slide-case-desc" style="margin-bottom:1cqw;"> &#9656; <strong>Short-Term:</strong> Catalog most common personas/metrics across deployments (extract through call notes), allow for Coval GTM teams to quickly access playbook information via query.</div>
+              <div class="slide-case-desc" style="margin-bottom:1cqw;"> &#9656; <strong>Short-Term:</strong> Catalog most common personas/metrics across deployments (extract through call notes) and correlate with business outcomes, allow for Coval GTM teams to quickly access playbook information via query.</div>
               <div class="slide-case-desc" style="margin-bottom:1cqw;"> &#9656; <strong>Long-Term:</strong> Run clustering analyses or leverage supervised learning techniques to determine which personas and metrics across past deployments lead to high usage patterns and perform best for specific metrics and use-cases.</div>
               <div class="slide-accordion">
                 <div class="slide-accordion-header" style="margin-top:1.5cqw;">
@@ -1330,15 +1331,21 @@
                   <div class="slide-case-desc">&#9656; High-net-worth client requesting urgent transfer</div>
                 </div>
               </div>
-              <!-- <div class="slide-accordion">
+              <div class="slide-accordion">
                 <div class="slide-accordion-header" style="margin-top:1.5cqw;">
-                  <div class="slide-case-title" style="font-size:1.6cqw;">Standard Metrics</div>
+                  <div class="slide-case-title" style="font-size:1.6cqw;">Observability-Business Metrics Map</div>
                   <span class="slide-accordion-icon">+</span>
                 </div>
                 <div style="height:1px; background:#1a1a1a; margin:0.3cqw 0 0.5cqw 0;"></div>
                 <div class="slide-accordion-body" style="display:none;">
+                  <div class="slide-case-desc" style="margin-top:0.4cqw;">&#9656; Conversation Metrics &#8594; Resolution Rate</div>
+                  <div class="slide-case-desc" style="margin-top:0.4cqw;">&#9656; Audio Quality Metrics &#8594; CSAT</div>
+                  <div class="slide-case-desc" style="margin-top:0.4cqw; margin-left:2cqw;">&#9656; Latency</div>
+                  <div class="slide-case-desc" style="margin-top:0.4cqw; margin-left:2cqw;">&#9656; Audio Clarity Score</div>
+                  <div class="slide-case-desc" style="margin-top:0.4cqw;">&#9656; Tool Call Success &#8594; Hallucination Rate</div>
+                  <div class="slide-case-desc" style="margin-top:0.4cqw;">&#9656; Task Success &#8594; Compliance Rate</div>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -1424,7 +1431,7 @@
       if (!dropdown) return;
       var title = document.getElementById('timeline-step-title');
       var weekLabel = document.getElementById('timeline-step-week');
-      var weekMap = {1:'Week 1', 2:'Week 1', 3:'Week 2', 4:'Week 2-3', 5:'Week 3-4', 6:'Week 4'};
+      var weekMap = {1:'Week 1', 2:'Week 1-2', 3:'Week 2', 4:'Week 3-4', 5:'Week 4-5', 6:'Week 6'};
       var items = dropdown.querySelectorAll('.slide-dropdown-item');
       var nodes = document.querySelectorAll('.slide-timeline-node');
       // Set initial active node
